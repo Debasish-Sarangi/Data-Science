@@ -1,0 +1,45 @@
+import numpy as np
+NoOfPatientDoc = input().strip().split(" ")
+NoOfPatients = int(NoOfPatientDoc[0])
+NoOfDoctors = int(NoOfPatientDoc[1])
+
+counter = 1
+DocEfforts = []
+RowEach = []
+while (counter <= NoOfDoctors):
+    data = input().strip().split(" ")[:NoOfPatients]
+    DocEfforts = [int(numeric_string) for numeric_string in data]
+    RowEach.append(DocEfforts)
+    counter = counter + 1
+    
+l1=[]
+l3=[]
+ss=0
+Con=0
+kon=0
+cnt1=0
+cnt2=0
+while(kon<NoOfDoctors and cnt1<NoOfPatients and cnt2<NoOfDoctors):
+
+    if(Con==0):
+        l1.append(sum(RowEach[kon][:cnt1+1]))
+    Con=1
+
+    ss=sum(RowEach[cnt2][cnt1+1:])
+    l3.append(ss)
+    cnt2=cnt2+1
+    ss=0
+    if(cnt2>=NoOfDoctors):
+
+        cnt1=cnt1+1
+        cnt2=0
+        Con=0
+    if(cnt1>=NoOfPatients):
+        
+        cnt1=0
+        kon=kon+1
+
+
+const= len(l3)/len(l1) 
+l2=np.repeat(l1,const)
+print(min(np.add(l2, l3)))
